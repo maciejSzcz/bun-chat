@@ -99,21 +99,21 @@ export function ClaudeChat() {
   };
 
   return (
-    <div className="mt-8 mx-auto w-full max-w-4xl">
+    <div className="mt-4 sm:mt-8 mx-auto w-full max-w-4xl px-2 sm:px-0">
       <div className="bg-[#1a1a1a] border-2 border-[#fbf0df] rounded-xl overflow-hidden">
         {/* Header */}
-        <div className="bg-[#fbf0df] text-[#1a1a1a] px-4 py-3 flex justify-between items-center">
-          <h2 className="text-lg font-bold">GPT-5 AI Chat</h2>
+        <div className="bg-[#fbf0df] text-[#1a1a1a] px-3 sm:px-4 py-2 sm:py-3 flex justify-between items-center">
+          <h2 className="text-base sm:text-lg font-bold">GPT-5 AI Chat</h2>
           <button
             onClick={clearChat}
-            className="text-sm bg-[#1a1a1a] text-[#fbf0df] px-3 py-1 rounded hover:bg-[#333] transition-colors"
+            className="text-xs sm:text-sm bg-[#1a1a1a] text-[#fbf0df] px-2 sm:px-3 py-1 rounded hover:bg-[#333] transition-colors"
           >
             Clear Chat
           </button>
         </div>
 
         {/* Messages */}
-        <div className="h-96 overflow-y-auto p-4 space-y-4">
+        <div className="h-80 sm:h-96 overflow-y-auto overflow-x-hidden p-3 sm:p-4 space-y-3 sm:space-y-4">
           {messages.map((message) => (
             <div
               key={message.id}
@@ -122,16 +122,18 @@ export function ClaudeChat() {
               }`}
             >
               <div
-                className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                className={`max-w-[85%] sm:max-w-[80%] rounded-lg px-3 sm:px-4 py-2 ${
                   message.role === "user"
                     ? "bg-[#fbf0df] text-[#1a1a1a]"
                     : "bg-[#333] text-[#fbf0df]"
                 }`}
               >
-                <div className="text-sm font-medium mb-1">
+                <div className="text-xs sm:text-sm font-medium mb-1">
                   {message.role === "user" ? "You" : "GPT-5"}
                 </div>
-                <div className="whitespace-pre-wrap">{message.content}</div>
+                <div className="whitespace-pre-wrap text-sm sm:text-base break-words">
+                  {message.content}
+                </div>
                 <div className="text-xs opacity-70 mt-1">
                   {message.timestamp.toLocaleTimeString()}
                 </div>
@@ -140,11 +142,11 @@ export function ClaudeChat() {
           ))}
           {isLoading && (
             <div className="flex justify-start">
-              <div className="bg-[#333] text-[#fbf0df] rounded-lg px-4 py-2">
-                <div className="text-sm font-medium mb-1">GPT-5</div>
+              <div className="bg-[#333] text-[#fbf0df] rounded-lg px-3 sm:px-4 py-2 max-w-[85%] sm:max-w-[80%]">
+                <div className="text-xs sm:text-sm font-medium mb-1">GPT-5</div>
                 <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#fbf0df]"></div>
-                  <span>Thinking...</span>
+                  <div className="animate-spin rounded-full h-3 w-3 sm:h-4 sm:w-4 border-b-2 border-[#fbf0df]"></div>
+                  <span className="text-sm sm:text-base">Thinking...</span>
                 </div>
               </div>
             </div>
@@ -153,20 +155,23 @@ export function ClaudeChat() {
         </div>
 
         {/* Input */}
-        <form onSubmit={sendMessage} className="p-4 border-t border-[#333]">
+        <form
+          onSubmit={sendMessage}
+          className="p-3 sm:p-4 border-t border-[#333]"
+        >
           <div className="flex gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message here..."
-              className="flex-1 bg-[#333] text-[#fbf0df] border border-[#555] rounded-lg px-3 py-2 focus:outline-none focus:border-[#fbf0df] placeholder-[#fbf0df]/50"
+              className="flex-1 bg-[#333] text-[#fbf0df] border border-[#555] rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:border-[#fbf0df] placeholder-[#fbf0df]/50"
               disabled={isLoading}
             />
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="bg-[#fbf0df] text-[#1a1a1a] px-4 py-2 rounded-lg font-medium hover:bg-[#f3d5a3] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="bg-[#fbf0df] text-[#1a1a1a] px-3 sm:px-4 py-2 rounded-lg font-medium text-sm sm:text-base hover:bg-[#f3d5a3] disabled:opacity-50 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
             >
               Send
             </button>
