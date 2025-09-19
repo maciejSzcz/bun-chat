@@ -9,7 +9,7 @@ const openrouter = createOpenRouter({
 
 const server = serve({
   port: process.env.PORT || 3000,
-  hostname: process.env.HOST || "localhost",
+  hostname: process.env.HOST || "0.0.0.0",
   routes: {
     // Serve index.html for all unmatched routes.
     "/*": index,
@@ -75,7 +75,7 @@ const server = serve({
 });
 
 console.log(
-  `🚀 Server running at http://${process.env.HOST || "localhost"}:${
+  `🚀 Server running at http://${process.env.HOST || "0.0.0.0"}:${
     process.env.PORT || 3000
   }`
 );
